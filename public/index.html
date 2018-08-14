@@ -50,6 +50,8 @@
 
             oReq.open("POST", "http://io.msalars.com/upload");
 
+            
+
             oReq.addEventListener("progress", updateProgress);
 
             var file = fileInput.files[0];
@@ -58,6 +60,8 @@
 
             formData.append("fileNew", file);
 
+            oReq.setRequestHeader( 'Content-Type', 'multipart/form-data' );
+            
             oReq.send(formData);
 
 
