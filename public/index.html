@@ -48,11 +48,14 @@
 
             var oReq = new XMLHttpRequest();
 
+
+
+            oReq.addEventListener("progress", updateProgress);  
             oReq.open("POST", "/upload");
 
-            console.log(oReq);
+            
 
-            oReq.addEventListener("progress", updateProgress);
+            
 
             var file = fileInput.files[0];
 
