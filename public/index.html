@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+    <title>Moodi File Uploader</title>
+</head>
+
+<body>
+
+
+
+
+
+    <div>
+        <input type="file" id="file-upload-btn" name="file-upload-btn" />
+    </div>
+    <br>
+    <div>
+        <input type="button" id="submit-button" value="Upload File" />
+    </div>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <script>
+        function updateProgress(oEvent) {
+            console.log(1);
+            if (oEvent.lengthComputable) {
+                var percentComplete = oEvent.loaded / oEvent.total;
+                //Do something with upload progress
+                console.log(percentComplete);
+            }
+        }
+
+        var fileInput = document.querySelector("#file-upload-btn");
+
+        var uploadBtn = document.querySelector("#submit-button");
+
+        uploadBtn.addEventListener("click", function (e) {
+
+            var oReq = new XMLHttpRequest();
+
+            oReq.open("POST", "/upload");
+
+            oReq.addEventListener("progress", updateProgress);
+
+            var file = fileInput.files[0];
+
+            var formData = new FormData();
+
+            formData.append("fileNew", file);
+
+            oReq.send(formData);
+
+
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>
