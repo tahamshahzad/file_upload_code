@@ -31,12 +31,30 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
     <script>
+
+        var timeStart = null;
+
         function updateProgress(oEvent) {
-            console.log("asdasd");
+          
+
             if (oEvent.lengthComputable) {
+
+
+
+                var timeElapsed = Date.now() - timeStart;
+
+
                 var percentComplete = oEvent.loaded / oEvent.total;
+
                 //Do something with upload progress
-                console.log(percentComplete);
+                console.log('time elapsed', (timeElapsed / 1000)+'s');
+                console.log('percent complete', percentComplete * 100);
+                console.log('megabyte transfered', oEvent.loaded/1000000);
+                console.log('megabyte total', oEvent.total/1000000);
+                console.log('---------------------------------------------');
+
+                
+
             }
         }
 
@@ -48,14 +66,14 @@
 
             var oReq = new XMLHttpRequest();
 
+            oReq.upload.addEventListener("progress", updateProgress);
 
 
-            oReq.addEventListener("progress", updateProgress);  
             oReq.open("POST", "/upload");
 
-            
 
-            
+
+
 
             var file = fileInput.files[0];
 
@@ -66,6 +84,10 @@
             // oReq.setRequestHeader( 'Content-Type', 'multipart/form-data' );
 
             oReq.send(formData);
+
+
+            timeStart = Date.now();
+
 
 
         })
